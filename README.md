@@ -1,9 +1,21 @@
 # BoltNew OTA Hotel Website
 
-一个基于 HTML、CSS、JavaScript 和 TypeScript 构建的酒店预订网站前端项目，模拟类似 OTA（在线旅行社）平台的核心功能。
+一个基于 React + TypeScript + Vite 构建的酒店预订网站前端项目，模拟类似 OTA（在线旅行社）平台的核心功能。
 
-![项目首页示例图](docs/demo_home.png)
-![酒店详情页示例图](docs/demo_hotel_detail.png)
+## 页面预览
+
+### 首页
+<img src="./assets/images/examples/home.png" alt="首页" width="100%">
+
+### 服务介绍
+<img src="./assets/images/examples/services.png" alt="服务介绍" width="100%">
+
+### 成功案例
+<img src="./assets/images/examples/cases.png" alt="成功案例" width="100%">
+
+### 关于我们
+
+<img src="./assets/images/examples/about.png" alt="关于我们" width="100%">
 
 ## 项目亮点
 
@@ -15,49 +27,123 @@
 
 ## 技术栈
 
-- **HTML**（52.9%）：页面结构搭建
-- **CSS**（27.3%）：样式表现和响应式设计
-- **JavaScript**（17.9%）：页面交互与动态效果
-- **TypeScript**（1.9%）：部分模块的类型安全和优化
+- **React 19** - 前端框架
+- **TypeScript** - 类型安全
+- **Vite 8** - 构建工具，支持热重载
+- **Material UI v7** - UI 组件库
+- **Emotion** - CSS-in-JS 样式方案
 
-## 快速启动
-
-1. 克隆代码仓库  
-   ```bash
-   git clone https://github.com/ligyDt/boltnew-ota-hotel-website1.git
-   cd boltnew-ota-hotel-website1
-   ```
-2. 安装依赖（如有 package.json，可跳过此步）
-   ```bash
-   npm install
-   ```
-3. 运行本地开发环境（如有构建流程）
-   ```bash
-   npm start
-   ```
-   或者  
-   直接打开 `index.html` 文件在浏览器中查看效果。
-
-## 示意图
-
-建议将项目首页和酒店详情页的截图放在 `docs/` 目录下（如 demo_home.png、demo_hotel_detail.png），并在项目主要位置展示，提升项目观感与可用性。
-
-## 目录结构说明
+## 目录结构
 
 ```
 boltnew-ota-hotel-website1/
 ├── src/               # 源码目录
-│   ├── assets/        # 图片及静态资源
-│   ├── components/    # 组件
-│   ├── pages/         # 页面模块
+│   ├── App.tsx        # React 应用主组件
+│   ├── main.tsx       # 应用入口
+│   ├── theme.ts       # Material UI 主题配置
+│   └── vite-env.d.ts  # Vite 类型声明
+├── assets/            # 静态资源
+│   ├── css/           # 样式文件
+│   ├── images/        # 图片资源
+│   └── js/            # JavaScript 脚本
+├── components/        # HTML 组件
+│   ├── footer.html
+│   └── header.html
 ├── public/            # 公共文件
-├── docs/              # 说明文档及截图
-├── index.html         # 入口文件
-├── package.json       # (如果有)
-└── README.md
+│   ├── favicon.svg
+│   └── icons.svg
+├── index.html         # 入口 HTML 文件
+├── package.json       # 项目依赖配置
+├── vite.config.ts     # Vite 配置文件
+├── tsconfig.json      # TypeScript 配置
+└── README.md          # 项目说明文档
 ```
 
-> 具体结构请依据实际代码情况完善。
+## 快速启动
+
+### 环境要求
+
+- Node.js 18+ 
+- npm 9+
+
+### 安装步骤
+
+1. **克隆代码仓库**
+   ```bash
+   git clone https://github.com/ligyDt/boltnew-ota-hotel-website1.git
+   cd boltnew-ota-hotel-website1
+   ```
+
+2. **安装依赖**
+   ```bash
+   npm install
+   ```
+
+3. **启动开发服务器**
+   ```bash
+   npm run dev
+   ```
+
+4. **访问项目**
+  
+   服务启动后，在浏览器中访问：
+   
+   - **本地访问**：http://localhost:5173/
+   - **局域网访问**：http://<你的IP地址>:5173/
+
+   > 默认端口为 **5173**，如需修改可在 `vite.config.ts` 中配置
+
+## 可用命令
+
+| 命令 | 说明 |
+|------|------|
+| `npm run dev` | 启动开发服务器（带热重载） |
+| `npm run build` | 构建生产版本 |
+| `npm run preview` | 预览生产构建 |
+| `npm run lint` | 运行 ESLint 代码检查 |
+
+## 本地开发调试指南
+
+### 热重载（HMR）
+项目使用 Vite 开发服务器，修改代码后页面会自动刷新，无需手动重启。
+
+### 端口配置
+默认端口为 5173，如需更改：
+
+**方式一：修改配置文件**（永久生效）
+编辑 `vite.config.ts`：
+```typescript
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 3000,  // 修改为你需要的端口
+    host: '0.0.0.0',
+  },
+})
+```
+
+**方式二：命令行参数**（临时生效）
+```bash
+npm run dev -- --port 3000
+```
+
+### 局域网访问
+如需在手机或其他设备上预览，确保 `vite.config.ts` 中配置了 `host: '0.0.0.0'`，然后使用局域网 IP 访问。
+
+### 调试注意事项
+1. 项目同时包含静态 HTML 页面和 React 应用
+2. 开发模式下，Vite 会自动处理 TypeScript 编译
+3. 如遇端口冲突，会自动尝试下一个可用端口
+
+## 构建部署
+
+```bash
+# 构建生产版本
+npm run build
+
+# 构建输出在 dist/ 目录
+# 可将 dist/ 目录内容部署到任意静态服务器
+```
 
 ## 贡献指南
 
